@@ -1,0 +1,34 @@
+//Write a program to reverse an array or string 
+
+import java.util.*;
+
+class Test{
+	public static void main(String args[]){
+		Scanner sc= new Scanner(System.in);
+		System.out.print("Would you like to enter (1) array or (2) string?   ");
+		int k=sc.nextInt();
+		sc.nextLine();
+		switch(k){
+			case 1:
+				System.out.print("Enter the array elements: ");
+				String line1=sc.nextLine();
+				String iarr[]=line1.split("[^0-9]+");
+				int n[]=new int[iarr.length];
+				for(int i=0; i<iarr.length; i++)
+					n[i]=Integer.valueOf(iarr[i]);
+				System.out.print("The given array in reverse order:  ");
+				for(int i=n.length-1; i>=0; i--)
+					System.out.print(n[i]+" ");
+				break;
+			case 2:
+				System.out.print("Enter the string: ");
+				String line2=sc.nextLine();
+				char sarr[]=line2.toCharArray();
+				System.out.print("The given string in reverse order:  ");
+				for(int i=sarr.length-1; i>=0; i--)
+					System.out.print(sarr[i]);
+				break;
+			default:System.out.println("Your input is wrong!!");
+		}
+	}
+}
