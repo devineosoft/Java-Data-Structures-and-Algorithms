@@ -1,0 +1,98 @@
+//Write a Java Menu driven Program for Arrays Data structure for following Menu. 1.Insert 2.Display 3.Search 4.Delete 5.Exit
+
+
+import java.util.*;
+class HighArray{
+	static int n=0;
+	private int a[]=new int[100];
+	
+	HighArray(){
+		System.out.println("A new HighArray object is created!");
+	}
+	
+	public void insert(int... arr){
+		for(int x:arr){
+			a[n++]=x;
+		}
+	}
+	
+	public int find(int key){
+		for(int i=0; i<n; i++){
+			if(a[i]==key)
+				return i;
+		}
+		return -1;
+	}
+	
+	public void display(){
+		for(int i=0; i<n; i++){
+			System.out.print(a[i]+"  ");
+		}
+	}
+	
+	public boolean delete (int key){
+		int x=this.find(key);
+		if(x==-1){
+			return false;
+		}else{
+			for(int i=x; i<n; i++)
+				a[i]=a[i+1];
+			n--;
+			return true;
+		}
+	}
+	
+	static void menu(){
+		System.out.println("================================================");
+		System.out.println("1. Insert Elements \n2. Find Element");
+		System.out.println("3. Display Elements \n4. Delete Element");
+		System.out.print("Please enter your choice: ");
+	}
+	
+}
+
+class Test{
+	public static void main(String args[]){
+		Scanner sc=new Scanner(System.in);
+		HighArray arr=new HighArray();
+		int n, key;
+		char choice='y';
+		while (choice=='y' || choice=='Y'){
+			HighArray.menu();
+			n=sc.nextInt();
+			switch(n){
+				case 1: System.out.print("Enter the elements to insert: ");
+					sc.nextLine();
+					String s=sc.nextLine();
+					String ss[]=s.split("[^0-9]+");
+					int ele[]=new int[ss.length];
+					for(int i=0;i<ss.length; i++)
+						ele[i]=Integer.valueOf(ss[i]);
+					arr.insert(ele);
+					break;
+				case 2: System.out.print("Enter the elements to find: ");
+					key=sc.nextInt();
+					int index=arr.find(key);
+					if(index==-1){
+						System.out.println(key+" not present in the array");
+					}else{
+						System.out.println(key+" found at index number '"+index+"'");
+					}
+					break;
+				case 3: arr.display();
+					break;
+				case 4: System.out.print("Enter the elements to delete: ");
+					key=sc.nextInt();
+					boolean status=arr.delete(key);
+					if(status==false)
+						System.out.println(key+" not present in the array to delete");
+					break;
+				default: System.out.println("You entered wrong choice!!");
+			}
+			System.out.print("Do you wish to continue (y/n): ");
+			choice=sc.next().charAt(0);
+		}
+	}
+}
+
+
