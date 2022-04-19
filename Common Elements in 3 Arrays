@@ -1,0 +1,74 @@
+//WAP to find common elements in 3 arrays
+
+
+import java.util.*;
+
+class MyArray{
+	static int n=0;
+	static int com[]=new int[20];
+	
+	public void insert(int x){
+		com[n++]=x;
+	}
+	
+	public void find(int key, int... arr){
+		for(int i=0; i<arr.length; i++){
+			if(arr[i]==key)
+				this.insert(key);
+		}
+	}
+	
+	public void findCom(int key, int... arr){
+		boolean found=false;
+		for(int i=0; i<arr.length; i++){
+			if(arr[i]==key)
+				found=true;
+		}
+		if(found==false)
+			this.delete(key);
+	}
+	
+	public void delete (int key){
+		for(int i=0; i<n; i++)
+			if(com[i]>=key)
+				com[i]=com[i+1];
+		n--;
+	}
+}
+
+
+class Test{
+	public static void main(String args[]){
+		Scanner sc= new Scanner(System.in);
+		MyArray marr=new MyArray();
+		int m,i;
+		System.out.print("No. of elements in 1st array: ");
+		m=sc.nextInt();
+		int arr1[]=new int[m];
+		System.out.print("Enter the elements in 1st array: ");
+		for(i=0; i<m; i++)
+			arr1[i]=sc.nextInt();
+		System.out.print("No. of elements in 2nd array: ");
+		m=sc.nextInt();
+		int arr2[]=new int[m];
+		System.out.print("Enter the elements in 2nd array: ");
+		for(i=0; i<m; i++)
+			arr2[i]=sc.nextInt();
+		System.out.print("No. of elements in 3rd array: ");
+		m=sc.nextInt();
+		int arr3[]=new int[m];
+		System.out.print("Enter the elements in 3rd array: ");
+		for(i=0; i<m; i++)
+			arr3[i]=sc.nextInt();
+		
+		for(i=0; i<arr1.length; i++)
+			marr.find(arr1[i], arr2);
+		
+		for(i=0; i<MyArray.n; i++)
+			marr.findCom(MyArray.com[i],arr3);
+		
+		System.out.print("The common elements are: ");
+		for(i=0; i<MyArray.n; i++)
+			System.out.print(MyArray.com[i]+" ");
+	}
+}
