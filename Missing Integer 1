@@ -1,0 +1,31 @@
+//You are given a list of n-1 integers and these integers are in the range of 1 to n. 
+//There are no duplicates in the list. One of the integers is missing in the list. Write an efficient code to find the missing integer. 
+
+import java.util.*;
+class Test{
+	static int linearSearch(int key, int arr[]){
+		for(int i=0; i<arr.length; i++){
+			if(arr[i]==key)
+				return i;
+		}
+		return -1;
+	}
+	
+	public static void main(String args[]){
+		Scanner sc= new Scanner(System.in);
+		System.out.print("Enter the number of elements in the array: ");
+		int n=sc.nextInt();
+		System.out.print("Enter the elements in the array: ");
+		int a[]=new int [n];
+		for(int i=0; i<n; i++)
+			a[i]=sc.nextInt();
+		
+		int result=0, i;
+		for(i=1; i<=n+1; i++){
+			result=linearSearch(i, a);
+			if(result ==-1)
+				break;
+		}
+		System.out.print("The missing element is "+i);
+	}
+}
