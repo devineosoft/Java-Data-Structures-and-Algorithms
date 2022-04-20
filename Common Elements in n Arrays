@@ -1,0 +1,68 @@
+//WAP to find the common elements in n arrays of unknown size.
+
+import java.util.*;
+
+class MyArray{
+	static int n=0;
+	static int com[]=new int[50];
+	
+	public void insert(int x){
+		com[n++]=x;
+	}
+	
+	public void find(int key, int arr[]){
+		for(int i=0; i<arr.length; i++){
+			if(arr[i]==key)
+				this.insert(key);
+		}
+	}
+	
+	public void findCom(int key, int arr[]){
+		boolean found=false;
+		for(int i=0; i<arr.length; i++){
+			if(arr[i]==key)
+				found=true;
+		}
+		if(found==false)
+			this.delete(key);
+	}
+	
+	public void delete (int key){
+		for(int i=0; i<n; i++)
+			if(com[i]>=key)
+				com[i]=com[i+1];
+		n--;
+	}
+}
+
+
+class Test{
+	public static void main(String args[]){
+		Scanner sc= new Scanner(System.in);
+		MyArray marr=new MyArray();
+		int m,i;
+		System.out.print("Enter the number of arrays: ");
+		m=sc.nextInt();
+		int arr[][]=new int[m][];
+		for(i=0; i<m; i++){
+			System.out.print("Enter the number of elements in array "+(i+1)+": ");
+			int x=sc.nextInt();
+			arr[i]=new int[x];
+			for(int j=0; j<x; j++){
+				arr[i][j]=sc.nextInt();
+			}
+		}
+				
+		for(i=0; i<arr[0].length; i++)
+			marr.find(arr[0][i], arr[1]);
+		
+		for(i=2; i<m; i++){
+			for(int j=0; j<MyArray.n; j++)
+				marr.findCom(MyArray.com[j],arr[i]);
+		}
+		
+		System.out.print("The common elements are: ");
+		for(i=0; i<MyArray.n; i++)
+			System.out.print(MyArray.com[i]+" ");
+	}
+}
