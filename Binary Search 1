@@ -1,0 +1,34 @@
+//given an array of n element, find a particular element using binary search
+
+import java.util.*;
+class Test2{
+	static int binarySearch(int key, int arr[],int l,int h){
+		int mid=l+(h-l)/2;
+		if(h>=l){
+			if(arr[mid]==key)
+				return mid;
+			else if (arr[mid]>key)
+				return binarySearch(key, arr,l,mid-1);
+			else
+				return binarySearch(key, arr,mid+1,h);
+		}
+		return -1;
+	}
+	
+	public static void main(String args[]){
+		Scanner sc= new Scanner(System.in);
+		System.out.print("Enter the number of elements in the array: ");
+		int n=sc.nextInt();
+		System.out.print("Enter the elements in the array: ");
+		int a[]=new int [n];
+		for(int i=0; i<n; i++)
+			a[i]=sc.nextInt();
+		System.out.print("Enter the elements to search: ");
+		int key=sc.nextInt();
+		int result=binarySearch(key, a,0,n-1);
+		if(result ==-1)
+			System.out.print("Element NOT found");
+		else
+			System.out.print("Element found at index number "+result);
+	}
+}
