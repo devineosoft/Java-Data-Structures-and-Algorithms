@@ -1,0 +1,44 @@
+/*
+Create a linked list to store and display n values from user
+*/
+
+import java.util.*;
+class LinkedDemo{
+	Node head;
+	
+	static class Node{
+		int data;
+		Node next;
+		
+		Node(int d){
+			data=d;
+			next=null;
+		}
+	}
+		
+	void display(){
+		Node n= this.head;
+		while(n!=null){
+			System.out.print(n.data+" ");
+			n=n.next;
+		}
+	}
+	
+
+	public static void main(String args[]){
+		Scanner sc= new Scanner(System.in);
+		LinkedDemo list=new LinkedDemo();
+		System.out.print("Enter the number of elements: ");
+		int n=sc.nextInt();
+		Node no[]=new Node[n];
+		System.out.print("Enter the elements: ");
+		no[0]=new Node(sc.nextInt());
+		list.head=no[0];
+		for(int i=1; i<n; i++)
+			no[i]=new Node(sc.nextInt());
+		list.head.next=no[0];
+		for(int i=0; i<n-1; i++)
+			no[i].next=no[i+1];
+		list.display();
+	}
+}
