@@ -1,0 +1,63 @@
+/*
+Create a linked list to store n values and delete any one element
+*/
+
+import java.util.*;
+class LinkedDemo{
+	Node head;
+	
+	static class Node{
+		int data;
+		Node next;
+		
+		Node(int d){
+			data=d;
+			next=null;
+		}
+	}
+		
+	void display(){
+		Node n= this.head;
+		while(n!=null){
+			System.out.print(n.data+" ");
+			n=n.next;
+		}
+	}
+	
+	void delete(int key){
+		Node prev, n=head;;
+		while(n!=null){
+			if(head.data==key){
+				head=n.next;
+				return;
+			}
+			prev=n;
+			n=n.next;
+			if(n!=null && n.data==key){
+				prev.next=n.next;
+				return;				
+			}
+		}return;
+	}
+
+	public static void main(String args[]){
+		Scanner sc= new Scanner(System.in);
+		LinkedDemo list=new LinkedDemo();
+		System.out.print("Enter the number of elements: ");
+		int n=sc.nextInt();
+		Node no[]=new Node[n];
+		System.out.print("Enter the elements: ");
+		no[0]=new Node(sc.nextInt());
+		list.head=no[0];
+		for(int i=1; i<n; i++)
+			no[i]=new Node(sc.nextInt());
+		list.head.next=no[0];
+		for(int i=0; i<n-1; i++)
+			no[i].next=no[i+1];
+		
+		System.out.print("Enter the elements to delete: ");
+		int num=sc.nextInt();
+		list.delete(num);
+		list.display();
+	}
+}
