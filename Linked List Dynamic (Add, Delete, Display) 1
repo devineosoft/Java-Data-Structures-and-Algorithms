@@ -1,0 +1,116 @@
+/*
+Create a linked list to be initialized with n values.
+Add methods to add, delete and display elements.
+The program should run as long as the user wishes.
+*/
+
+import java.util.*;
+class LinkedDemo{
+	
+	Node head;
+	
+	static class Node{
+		int data;
+		Node next;
+		
+		Node(int d){
+			data=d;
+			next=null;
+		}
+	}
+	
+	void display(){
+		Node n=head;
+		while(n!=null){
+			System.out.print(n.data+" ");
+			n=n.next;
+		}
+	}	
+	
+	void insert(int key, int value){
+		Node n=head;
+		while(n!=null){
+			if(key==0){
+				Node new_node=new Node(value);
+				new_node.next=head;
+				head=new_node;
+				return;
+			}
+			if(n.data==key){
+				Node new_node=new Node(value);
+				new_node.next=n.next;
+				n.next=new_node;
+				return;
+			}
+			n=n.next;
+		}
+		System.out.println("The data '"+key+"' does not exist in the list.\nHence '"+value+"' could not be inserted");
+		return;
+	}
+	
+	void delete(int key){
+		Node prev, n=head;
+		while(n!=null){
+			if(head.data==key){
+				head=n.next;
+				return;
+			}
+			prev=n;
+			n=n.next;
+			if(n!=null && n.data==key){
+				prev.next=n.next;
+				return;
+			}
+		}
+		System.out.print("The data '"+key+"' does not exist in the list.");
+		return;
+	}
+	
+	void menu(){
+		System.out.println("\n1. Insert \t2. Delete\t 3. Display");
+		System.out.print("Enter your choice: ");
+	}
+	
+	public static void main(String args[]){
+		Scanner sc= new Scanner(System.in);
+		LinkedDemo list=new LinkedDemo();
+		System.out.print("Enter the number of elements in the list: ");
+		int x=sc.nextInt(), key;
+		Node n[]=new Node[x];
+		System.out.print("Enter the elements in the list: ");
+		for(int i=0; i<x; i++){
+			n[i]=new Node(sc.nextInt());
+		}
+		list.head=n[0];
+		list.head.next=n[0].next;
+		for(int i=0; i<x-1; i++){
+			n[i].next=n[i+1];
+		}
+		char yorn='y';
+		while(yorn=='y' || yorn=='Y'){
+			list.menu();
+			int choice=sc.nextInt();
+			switch(choice){
+				case 1:
+					System.out.print("Enter the element you want to insert: ");
+					int value=sc.nextInt();
+					System.out.print("After which element do you want to insert\n\t(Enter '0' if you want to insert 1st element): ");
+					key=sc.nextInt();
+					list.insert(key, value);
+					break;
+				case 2:
+					System.out.print("Enter the element you want to delete: ");
+					key=sc.nextInt();
+					list.delete(key);
+					break;
+				case 3:
+					System.out.print("The updated list is: ");
+					list.display();
+					break;
+				default:System.out.println("You entered a wrong choice!");
+			}
+			System.out.print("\nDo you wish to continue (Y/N): ");
+			yorn=sc.next().charAt(0);		
+		}
+	}
+}
