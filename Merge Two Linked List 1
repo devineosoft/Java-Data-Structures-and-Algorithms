@@ -1,0 +1,68 @@
+//WAP to merge the elements of two linked list into one list.
+
+
+import java.util.*;
+public class LinkedTest {
+	
+	Node head;
+	
+	static class Node{
+		int data;
+		Node next;
+		
+		Node(int d){
+			data=d;
+		}
+	}
+	
+	void display(){
+		Node n=this.head;
+		while(n!=null){
+			System.out.print(n.data+" ");
+			n=n.next;
+		}
+	}
+	
+	static public void main(String args[]){
+		Scanner sc=new Scanner(System.in);
+		LinkedTest list1=new LinkedTest();
+		LinkedTest list2=new LinkedTest();
+		int n, i=0;
+		System.out.print("Enter the number of elements in list 1: ");
+		n=sc.nextInt();
+		Node n1[]=new Node[n];
+		System.out.print("\nEnter the elements in list 1: ");
+		list1.head=new Node(sc.nextInt());
+		for(i=1; i<n; i++)
+			n1[i]=new Node(sc.nextInt());
+		list1.head.next=n1[1];
+		for(i=1; i<n-1; i++)
+			n1[i].next=n1[i+1];
+		
+		System.out.print("\nEnter the number of elements in list 2: ");
+		int m=sc.nextInt();
+		Node n2[]=new Node[n];
+		System.out.print("Enter the elements in list 2: ");
+		list2.head=new Node(sc.nextInt());
+		for(i=1; i<m; i++)
+			n2[i]=new Node(sc.nextInt());
+		list2.head.next=n2[1];
+		for(i=1; i<m-1; i++)
+			n2[i].next=n2[i+1];
+		
+		System.out.print("\nList 1: ");
+		list1.display();
+		System.out.print("\nList 2: ");
+		list2.display();
+		
+		System.out.println("Appending list 2 at the end of list 1");
+		n1[n-1].next=list2.head;
+		//System.out.println("Appending list 1 at the end of list 2");
+		//n2[m-1].next=list1.head;
+		
+		System.out.print("\nList 1: ");
+		list1.display();
+		System.out.print("\nList 2: ");
+		list2.display();
+	}
+}
