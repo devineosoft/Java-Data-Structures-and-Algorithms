@@ -1,0 +1,146 @@
+//WAP to implement Doubly Linked List and write functions to insert elements, delete elements and 
+//display the elements in forward and reverse order as many times as the user wants.
+
+
+import java.util.*;
+public class DoublyTest {
+	Node head;
+	
+	static class Node{
+		int data;
+		Node next;
+		Node prev;
+		
+		Node(int d){
+			this.data=d;
+		}
+	}
+		
+		void insert (int d){
+			Node n=head;
+			Node newNode=new Node(d);
+			if(n.prev==null){
+				newNode.next=n;
+				n.prev=newNode;
+				head=newNode;
+			}
+		}
+		
+		void insert(int key, int value){
+			Node n=head;
+			while(n!=null){
+				if(n.data==key){
+					Node newNode=new Node(value);
+					newNode.next=n.next;
+					newNode.prev=n;
+					if(n.next!=null)
+						n.next.prev=newNode;
+					n.next=newNode;
+					return;
+				}n=n.next;
+			}return;
+		}
+		
+		void displayForward(){
+			Node n=head;
+			while(n!=null){
+				System.out.print(n.data+" ");
+				n=n.next;
+			}
+		}
+		
+		void displayReverse(){
+			Node n=head;
+			Node p=null;
+			while(n.next!=null)
+				n=n.next;
+			p=n;
+			while(p!=null){
+				System.out.print(p.data+" ");
+				p=p.prev;
+			}
+		}
+		
+		void delete(int value){
+			Node n=head;
+			if(head.data==value){
+				head=head.next;
+				head.prev=null;
+				return;
+			}
+			while(n!=null){
+				if(n.data==value){
+					if(n.next!=null)
+						n.next.prev=n.prev;
+					if(n.prev!=null)
+						n.prev.next=n.next;
+					n=null;
+					return;
+				}n=n.next;
+			}
+			System.out.println("Element "+value+" not found in the list to delete");
+		}
+		
+		void menu(){
+			System.out.println("\n\t 1. Insert\t 2. Display\t 3. Delete");
+			System.out.print("Enter your choice: ");
+		}
+	
+	
+	public static void main(String args[]){
+		Scanner sc=new Scanner(System.in);
+		DoublyTest list=new DoublyTest();
+		System.out.print("Enter the number of elements in the list:");
+		int x=sc.nextInt(), choice, value, key,y;
+		Node n[]=new Node[x];
+		System.out.print("Enter the elements: ");
+		n[0]=new Node(sc.nextInt());
+		list.head=n[0];
+		if(x>1){			
+			for(int i=1; i<x; i++)
+				n[i]=new Node(sc.nextInt());
+			list.head.next=n[1];
+			for(int i=1; i<x-1; i++){
+				n[i].prev=n[i-1];
+				n[i].next=n[i+1];
+			}
+			n[x-1].prev=n[x-2];
+		}
+		char ch='y';
+		while(ch=='y' || ch=='Y'){
+			list.menu();
+			choice=sc.nextInt();
+			switch(choice){
+				case 1:
+					System.out.print("Press (1) for inserting at the head position and (2) for inserting after a value: ");
+					y=sc.nextInt();
+					if(y==1){
+						System.out.print("Enter the element to insert: ");
+						list.insert(sc.nextInt());						
+					}else if(y==2){
+						System.out.print("Enter the element to insert: ");
+						value=sc.nextInt();
+						System.out.print("After which element do you want to insert: ");
+						key=sc.nextInt();
+						list.insert(key, value);
+					}
+					break;
+				case 2:
+					System.out.print("Press (1) forward list and (2) for reverse list: ");
+					y=sc.nextInt();
+					if(y==1)
+						list.displayForward();
+					else if(y==2)
+						list.displayReverse();
+					break;
+				case 3:
+					System.out.print("Enter the element you want to delete: ");
+					list.delete(sc.nextInt());
+					break;
+				default:System.out.println("You entered a wrong input");
+			}
+			System.out.println("Do you wish to continue (Y/N)");
+			ch=sc.next().charAt(0);
+		}
+	}
+}
