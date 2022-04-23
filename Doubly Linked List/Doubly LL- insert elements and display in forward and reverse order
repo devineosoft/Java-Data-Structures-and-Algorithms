@@ -1,0 +1,89 @@
+//WAP to implement Doubly Linked List and write functions to insert elements and display the elements in forward and reverse order.
+
+
+import java.util.*;
+public class DoublyTest {
+	
+	Node head;
+	
+	static class Node{
+		int data;
+		Node next;
+		Node prev;
+		
+		Node(int d){
+			data=d;
+			next=null;
+			prev=null;
+		}
+	}
+	
+	void insert(int data){
+		Node new_node=new Node(data);
+		if(head==null)
+			head=new_node;
+		else{
+			new_node.next=head;
+			head.prev=new_node;
+			head=new_node;
+		}	
+	}
+	
+	void insert(int key, int value){
+		Node n=head;
+		while(n!=null){
+			if(n.data==key){
+				Node new_node=new Node(value);
+				new_node.next=n.next;
+				new_node.prev=n;
+				if(n.next!=null)
+					n.next.prev=new_node;
+				n.next=new_node;				
+				return;
+			}n=n.next;
+		}return;
+	}
+	
+	void append(int value){
+		Node n=head;
+		while(n.next!=null)
+			n=n.next;
+		this.insert(n.data,value);
+		return;
+	}
+	
+	void displayForward(){
+		Node n=head;
+		System.out.print("\nForward Printing: ");
+		while(n!=null){
+			System.out.print(n.data+" ");
+			n=n.next;
+		}
+	}
+	
+	void displayBackward(){
+		Node n=head;
+		Node p=null;
+		System.out.print("\nReverse Printing: ");
+		while(n!=null){
+			p=n;
+			n=n.next;
+		}
+		while(p!=null){
+			System.out.print(p.data+" ");
+			p=p.prev;
+		}	
+	}
+	
+	static public void main(String args[]){
+		Scanner sc=new Scanner(System.in);
+		DoublyTest list1=new DoublyTest();
+		list1.insert(50);
+		list1.insert(40);
+		list1.insert(40,45);
+		list1.insert(50,60);
+		list1.append(70);
+		list1.displayForward();
+		list1.displayBackward();
+	}
+}
