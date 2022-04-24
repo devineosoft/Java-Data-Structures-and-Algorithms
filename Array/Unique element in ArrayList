@@ -1,0 +1,19 @@
+//There is an array with every element repeated twice except one. Find that element?
+
+import java.util.*;
+public class Test {
+	public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+		ArrayList <Integer> arr=new ArrayList<>();
+		System.out.print("Enter the size of the array: ");
+		int n=sc.nextInt();
+		System.out.println("Enter the elements of the array: ");
+		for(int i=0; i<n; i++)
+			arr.add(sc.nextInt());
+		System.out.println("\nThe element which is not repeated is ");
+		for(int i=0; i<n; i++){
+			if(arr.indexOf(arr.get(i))==arr.lastIndexOf(arr.get(i)))
+				System.out.print(arr.get(i)+" ");	
+		}
+    }
+}
