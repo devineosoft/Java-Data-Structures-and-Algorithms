@@ -1,0 +1,61 @@
+//WAP to find kth smallest and largest element in an array.
+
+
+import java.util.*;
+public class Test {
+	static int arr[]=new int[20];
+	static int n;
+	
+	static int max(){
+		int max=arr[0];
+		for(int i=1; i<n; i++){
+			if(arr[i]>max)
+				max=arr[i];
+		}
+		return max;
+	}
+	
+	static int min(){
+		int min=arr[0];
+		for(int i=1; i<n; i++){
+			if(arr[i]<min)
+				min=arr[i];
+		}
+		return min;
+	}
+	
+	static void delete(int value){
+		for(int i=0; i<n; i++){
+			if(arr[i]==value){
+				for(int j=i; j<n-1; j++){
+					arr[j]=arr[j+1];
+				}
+				n--;
+			}
+		}
+	}
+		
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+		System.out.print("Enter the number of elements in the array: ");
+		int m=sc.nextInt();
+		n=m;
+		int a[]=new int[m];
+		System.out.print("Enter the elements in the array: ");
+		for(int i=0; i<m; i++)
+			a[i]=sc.nextInt();
+		arr=a;
+		System.out.print("Enter the value of k for kth smallest and largest element : ");
+		int k=sc.nextInt(),max=0, min=0;
+		for(int i=1; i<=k; i++){
+			max=max();
+			if(i<k)
+				delete(max);
+			min=min();
+			if(i<k)
+				delete(min);
+		}
+		System.out.println("The kth smallest element is "+min);
+		System.out.println("The kth largest element is "+max);
+	}
+}
