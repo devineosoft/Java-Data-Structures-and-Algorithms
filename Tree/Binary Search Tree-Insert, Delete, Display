@@ -1,0 +1,127 @@
+//Program to implement a Binary Search Tree with functions to add elements, delete elements and display them in In-Order, Pre-Order and Post-Order traversal.
+
+import java.util.*;
+class BSTree1{
+	Node root;
+	
+	static class Node{
+		int data;
+		Node right;
+		Node left;
+		
+		Node(int d){
+			this.data=d;
+		}
+	}
+	
+	Node insert(Node root,int key){
+		if (this.root==null)
+			this.root=new Node(key);
+		if(root ==null){
+			root=new Node(key);
+			return root;
+		}
+		if(key<=root.data)
+			root.left=insert(root.left, key);
+		else
+			root.right=insert(root.right, key);
+		return root;
+	}
+	
+	void displayInorder(Node root){
+		if(root==null)
+			return;
+		displayInorder(root.left);
+		System.out.print(root.data+" ");
+		displayInorder(root.right);
+	}
+	
+	void displayPreorder(Node root){
+		if(root==null)
+			return;
+		System.out.print(root.data+" ");
+		displayPreorder(root.left);
+		displayPreorder(root.right);
+	}
+	
+	void displayPostorder(Node root){
+		if(root==null)
+			return;
+		displayPostorder(root.left);
+		displayPostorder(root.right);
+		System.out.print(root.data+" ");
+	}
+	
+	Node delete(Node root, int key){
+		if(root==null)
+			return null;
+		if(key<root.data)
+			root.left=delete(root.left, key);
+		else if(key>root.data)
+			root.right=delete(root.right, key);
+		else{
+			if(root.left==null)
+				return root.right;
+			else if(root.right==null)
+				return root.left;
+			root.data=minValue(root.right);
+			root.right=delete(root.right, root.data);
+		}
+		return root;
+	}
+	
+	int minValue(Node root){
+		int x= root.data;
+		while(root.left!=null){
+			x=root.left.data;
+			root=root.left;
+		}
+		return x;
+	}
+	
+	
+	public static void main(String args[]){
+		Scanner sc=new Scanner(System.in);
+		System.out.print("Enter the number of elements:");
+		BSTree1 t=new BSTree1();
+		int x=sc.nextInt();
+		System.out.print("Enter the elements:");
+		for(int i=0; i<x;i++)
+			t.insert(t.root, sc.nextInt());
+		char cont='y';
+		int choice, order;
+		while(cont=='y' || cont=='Y'){
+			System.out.println("\n1. Insert\t2. Delete\t3. Display\t");
+			System.out.print("Enter your choice: ");
+			choice=sc.nextInt();
+			switch(choice){
+				case 1:
+					System.out.print("Enter the element you want to insert: ");
+					t.insert(t.root,sc.nextInt());
+					break;
+				case 2:
+					System.out.print("Enter the element you want to delete: ");
+					t.delete(t.root,sc.nextInt());
+					break;
+				case 3:
+					System.out.print("Which type of display will you like: \n");
+					System.out.print("1. Pre-Order\t 2. In-Order\t 3. Post-Order\nEnter your choice: ");
+					order=sc.nextInt();
+					if(order==1)
+						t.displayPreorder(t.root);
+					else if(order==2)
+						t.displayInorder(t.root);
+					else if(order==3)
+						t.displayPostorder(t.root);
+					else
+						System.out.println("Wrong input!! ");
+					System.out.println();
+					break;
+				default:
+					System.out.print("Wrong input!! ");
+			}
+			System.out.print("Do you wish to continue? (Y/N): ");
+			cont=sc.next().charAt(0);
+		}	
+	}
+}
