@@ -1,0 +1,60 @@
+//WAP to reverse the string using Stack implementation.
+
+import java.util.*;
+
+class Stack{
+	private int size;
+	private char s[];
+	private int top;
+	
+	Stack(int size){
+		this.size=size;
+		s=new char[this.size];	
+		top=-1;
+	}
+	
+	boolean isEmpty(){
+		return (top<0);
+	}
+	
+	boolean push(char data){
+		if(isFull()){
+			System.out.println("Stack OVERFLOW - cant add new element!");
+			return false;
+		}else{
+			s[++top]=data;
+			return true;
+		}
+	}
+	
+	char pop(){
+		if(isEmpty()){
+			return ' ';
+		}else{
+			return s[top--];
+		}
+	}
+
+	boolean isFull(){
+		return(this.top+1>=this.size);
+	}
+}
+
+class StackDemo{
+	static StringBuffer reverse(StringBuffer str){
+			int n=str.length();
+			Stack s1=new Stack(n);
+			for(int i=0; i<n; i++)
+				s1.push(str.charAt(i));
+			for(int i=0; i<n; i++)
+				str.setCharAt(i, (char)s1.pop());
+			return str;
+		}
+		
+	public static void main(String args[]){
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter any line");
+		StringBuffer st=new StringBuffer(sc.nextLine());
+		System.out.println("The line in reverse order is \n"+reverse(st));
+	}
+}
