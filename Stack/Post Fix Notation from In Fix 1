@@ -1,4 +1,6 @@
 //WAP to convert the inorder mathematical expression into post order format using stack. 
+//The program works perfectly if brakets are given properly for each step according to preference.
+//Program does not take care of higher preference operator like */ coming together.
 
 import java.util.*;
 
