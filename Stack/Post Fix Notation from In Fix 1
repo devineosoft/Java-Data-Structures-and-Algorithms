@@ -1,0 +1,71 @@
+//WAP to convert the inorder mathematical expression into post order format using stack. 
+
+import java.util.*;
+
+class Stack{
+	private int size;
+	private char s[];
+	private int top;
+	
+	Stack(int size){
+		this.size=size;
+		s=new char[this.size];	
+		top=-1;
+	}
+	
+	boolean isEmpty(){
+		return (top<0);
+	}
+	
+	boolean push(char data){
+		if(isFull()){
+			System.out.println("Stack OVERFLOW - cant add new element!");
+			return false;
+		}else{
+			s[++top]=data;
+			return true;
+		}
+	}
+	
+	char pop(){
+		if(isEmpty()){
+			return ' ';
+		}else{
+			return s[top--];
+		}
+	}
+
+	boolean isFull(){
+		return(this.top+1>=this.size);
+	}
+}
+
+class StackDemo{
+	public static void main(String args[]){
+		Scanner sc=new Scanner(System.in);
+		Stack s1=new Stack(10);
+		System.out.println("Enter the In-Order expression: ");
+		String op="";
+		String exp=sc.nextLine();
+		int n=exp.length();
+		char b, c;
+		boolean flag=true;
+		for(int i=0; i<n; i++){
+			b=exp.charAt(i);
+			if(b==' ')
+				continue;
+			else if(!Character.isLetter(b) && b!=')')
+				s1.push(b);
+			else if(Character.isLetter(b))
+				op=op+b;
+			else if(b==')'){
+				c=s1.pop();
+				while(c!='('){
+					op=op+c;
+					c=s1.pop();
+				}
+			}
+		}
+		System.out.println(op);
+	}
+}
