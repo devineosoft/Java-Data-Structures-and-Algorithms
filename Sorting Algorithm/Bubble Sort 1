@@ -1,0 +1,33 @@
+//Bubble Sort Algorithm
+//BestCase=WorstCase=AverageCase=O(n^)
+
+import java.util.*;
+class Test2{
+	static void bubbleSort(int a[]){
+		int n=a.length,temp;
+		for(int i=0; i<n; i++){
+			for (int j=0; j<n-i-1; j++){
+				if(a[j]>a[j+1]){
+					temp=a[j];
+					a[j]=a[j+1];
+					a[j+1]=temp;
+				}
+			}
+		}
+	}
+	
+	public static void main(String args[]){
+		Scanner sc=new Scanner(System.in);
+		System.out.print("Enter the number of elements in the array:");
+		int n=sc.nextInt();
+		System.out.print("Enter the elements in the array:");
+		int arr[]=new int[n];
+		for(int i=0; i<n; i++)
+			arr[i]=sc.nextInt();
+		bubbleSort(arr);
+		System.out.print("Array after sorting is: ");
+		for(int each:arr)
+			System.out.print(each+"  ");
+		
+	}
+}
