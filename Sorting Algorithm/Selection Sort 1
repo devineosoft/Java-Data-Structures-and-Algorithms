@@ -7,7 +7,7 @@ class Test2{
 	static void selectionSort(int a[]){
 		int n=a.length,temp,min;
 		for(int i=0; i<n-1; i++){
-			min=a[i]
+			min=a[i];
 			for (int j=i+1; j<n; j++){
 				if(min>a[j]){
 					temp=min;
@@ -15,6 +15,7 @@ class Test2{
 					a[j]=temp;
 				}
 			}
+			a[i]=min;
 		}
 	}
 	
@@ -30,6 +31,5 @@ class Test2{
 		System.out.print("Array after sorting is: ");
 		for(int each:arr)
 			System.out.print(each+"  ");
-		
 	}
 }
