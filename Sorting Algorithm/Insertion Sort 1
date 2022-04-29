@@ -1,0 +1,31 @@
+//Insertion Sort Algorithm
+//BestCase=O(n)    WorstCase=AverageCase=O(n^2)
+//during every iteration the array is divided into sorted ans unsorted. 
+//for every value of unsorted array, it will be swapped only one to the final position
+
+import java.util.*;
+class Test2{
+	static void insertionSort(int a[]){
+		int n=a.length, key,j;
+		for(int i=1; i<n; i++){
+			key=a[i];
+			for (j=i-1; j>=0 && key<a[j]; j--)
+					a[j+1]=a[j];
+			a[j+1]=key;
+		}
+	}
+	
+	public static void main(String args[]){
+		Scanner sc=new Scanner(System.in);
+		System.out.print("Enter the number of elements in the array:");
+		int n=sc.nextInt();
+		System.out.print("Enter the elements in the array:");
+		int arr[]=new int[n];
+		for(int i=0; i<n; i++)
+			arr[i]=sc.nextInt();
+		insertionSort(arr);
+		System.out.print("Array after sorting is: ");
+		for(int each:arr)
+			System.out.print(each+"  ");
+	}
+}
