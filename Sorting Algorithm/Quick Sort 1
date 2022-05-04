@@ -1,0 +1,52 @@
+//Quick Sort Algorithm
+//BestCase=O(n)    WorstCase=AverageCase=O(n log n)
+//during every iteration the array is divided into sorted ans unsorted. 
+//Last element of the array is considered as the pivot value and 
+//values smaller to it are stored on the left side and largere to the right
+//thus giving the pivot its proper position.
+
+import java.util.*;
+
+class QuickSort{
+	static void divide(int arr[], int low, int high){
+		if(low>=high)
+			return;
+		int pivotindex=pivot(arr, low, high);
+		divide(arr, low, pivotindex-1);
+		divide(arr, pivotindex+1, high);
+	}
+	
+	static int pivot(int arr[], int low, int high)    
+	{    
+		int piv=arr[high];
+		int i=low-1, temp;
+		for(int j=low; j<high; j++){
+			if(arr[j]<piv){
+				i++;
+				temp=arr[i];
+				arr[i]=arr[j];
+				arr[j]=temp;
+			}
+		}
+		i++;
+		temp=arr[i];
+		arr[i]=arr[high];
+		arr[high]=temp;
+		return i;
+	} 
+} 
+class Test2{
+	public static void main(String args[]){
+		Scanner sc=new Scanner(System.in);
+		System.out.print("Enter the number of elements in the array:");
+		int n=sc.nextInt();
+		System.out.print("Enter the elements in the array:");
+		int arr[]=new int[n];
+		for(int i=0; i<n; i++)
+			arr[i]=sc.nextInt();
+		QuickSort.divide(arr, 0, n-1);
+		System.out.print("Array after sorting is: ");
+		for(int each:arr)
+			System.out.print(each+"  ");
+	}
+}
