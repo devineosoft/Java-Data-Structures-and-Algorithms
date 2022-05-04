@@ -1,0 +1,57 @@
+//Heap Sort Algorithm
+//BestCase=O(n)    WorstCase=AverageCase=O(n log n)
+//max heap is used to sort
+
+import java.util.*;
+
+class heapsort {
+	static void sort(int a1[]){
+		int n = a1.length;
+		for (int i=n/2-1; i>=0; i--)
+			heapify(a1, n, i);
+
+		for (int i = n - 1; i > 0; i--) {
+			int temp = a1[0];
+			a1[0] = a1[i];
+			a1[i] = temp;
+			heapify(a1, i, 0);
+		}
+	}
+
+	static void heapify(int a1[], int n, int i){
+		int largest = i; 
+		int l = 2 * i ; 
+		int r = 2 * i + 1; 
+
+		if (l < n && a1[l] > a1[largest])
+			largest = l;
+
+		if (r < n && a1[r] > a1[largest])
+			largest = r;
+		
+		if (largest != i) {
+			int temp = a1[i];
+			a1[i] = a1[largest];
+			a1[largest] = temp;
+
+			heapify(a1, n, largest);
+		}
+	}
+}
+
+
+class Test2{
+	public static void main(String args[]){
+		Scanner sc=new Scanner(System.in);
+		System.out.print("Enter the number of elements in the array:");
+		int n=sc.nextInt();
+		System.out.print("Enter the elements in the array:");
+		int arr[]=new int[n];
+		for(int i=0; i<n; i++)
+			arr[i]=sc.nextInt();
+		heapsort.sort(arr);
+		System.out.print("Array after sorting is: ");
+		for(int each:arr)
+			System.out.print(each+"  ");
+	}
+}
