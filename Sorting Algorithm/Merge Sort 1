@@ -1,0 +1,64 @@
+//Merge Sort Algorithm
+//BestCase=O(n)    WorstCase=AverageCase=O(n log n)
+//during every iteration the array is divided into sorted ans unsorted. 
+//array is divided to arrays of one element and sorted while merging
+
+import java.util.*;
+
+class MergeSort{
+	static void divide(int arr[], int si, int ei){
+		if(si>=ei)
+			return;
+		int mid=si+(ei-si)/2;
+		divide(arr, si, mid);
+		divide(arr, mid+1, ei);
+		conqure(arr, si, mid, ei);
+	}
+	
+	static void conqure(int a[], int si, int mid, int ei)    
+	{    
+		int i, j, k;  
+		int n1 = mid - si + 1;    
+		int n2 = ei - mid;    
+		  
+		int LeftArray[]=new int[n1];
+		int RightArray[]=new int[n2];
+		
+		for (i = 0; i < n1; i++)    
+			LeftArray[i] = a[si + i]; 
+		
+		for (j = 0; j < n2; j++)    
+			RightArray[j] = a[mid + 1 + j];    
+		  
+		i = 0; /* initial index of first sub-array */  
+		j = 0; /* initial index of second sub-array */   
+		k = si;  /* initial index of merged sub-array */  
+		  
+		while (i < n1 && j < n2){    
+			if(LeftArray[i] <= RightArray[j])
+				a[k++] = LeftArray[i++];       
+			else
+				a[k++] = RightArray[j++];    
+		}    
+		while (i<n1)
+			a[k++] = LeftArray[i++];       
+		  
+		while (j<n2)      
+			a[k++] = RightArray[j++];      
+	} 
+} 
+class Test2{
+	public static void main(String args[]){
+		Scanner sc=new Scanner(System.in);
+		System.out.print("Enter the number of elements in the array:");
+		int n=sc.nextInt();
+		System.out.print("Enter the elements in the array:");
+		int arr[]=new int[n];
+		for(int i=0; i<n; i++)
+			arr[i]=sc.nextInt();
+		MergeSort.divide(arr, 0, n-1);
+		System.out.print("Array after sorting is: ");
+		for(int each:arr)
+			System.out.print(each+"  ");
+	}
+}
