@@ -1,0 +1,108 @@
+//WAP to implement queue data structure using array
+//the program should contain functions like isEmpty, enqueue, dequeue, count and diaplay
+
+import java.util.*;
+
+class Queue {
+	Node head;
+	Node tail;
+	
+	static class Node{
+		int data;
+		Node next;
+		
+		Node(int d){
+			data=d;
+		}
+	}
+	
+	void enqueue(int key){
+		if(head==null && tail==null){
+			head=new Node(key);
+			tail=head;
+			return;
+		}
+		while(tail!=null){
+			tail.next=new Node(key);
+			tail=tail.next;
+			return;
+		}
+	}
+	
+	boolean isEmpty(){
+		if(this.head==null && this.tail==null){
+			System.out.println("Queue is empty");
+			return true;
+		}
+		else 
+			return false;
+	}
+	
+	void display(){
+		if(isEmpty())
+			return;
+		System.out.print("\nHead --> ");
+		Node n=head;
+		while(n!=null){
+			System.out.print(n.data+"-> ");
+			n=n.next;
+		}
+		System.out.println("Tail");
+		return;
+	}
+	
+	boolean dequeue(){
+		if(isEmpty()){
+			System.out.println("Cannot delete");
+			return false;
+		}
+		System.out.println("Element '"+head.data+"' deleted");
+		head=head.next;
+		return true;
+	}
+	
+	int count(){
+		int i=0;
+		Node n=head;
+		while(n!=null){
+			i++;
+			n=n.next;
+		}
+		return i;
+	}
+	
+
+	public static void main(String args[]){
+		Scanner sc=new Scanner(System.in);
+		Queue q=new Queue();
+		System.out.print("Enter the number of elements you want to add:");
+		int n=sc.nextInt();
+		System.out.print("Enter the elements in the array:");
+		for(int i=0; i<n; i++)
+			q.enqueue(sc.nextInt());
+		char ch='y';
+		int choice;
+		while(ch=='y' ||ch=='Y'){
+			System.out.println("\n1. Enqueue\t2. Dequeue\t3. Count\t4. Display");
+			System.out.print("Enter your choice: ");
+			choice=sc.nextInt();
+			switch (choice){
+				case 1: System.out.print("Enter the data to push:");
+					q.enqueue(sc.nextInt());
+					break;
+				case 2:
+					q.dequeue();
+					break;
+				case 3:
+					System.out.println("There are "+q.count()+" elements in the queue");
+					break;
+				case 4:
+					q.display();
+					break;
+				default:System.out.println("Invalid choice");
+			}
+			System.out.print("\nDo you wish to continue (y/n): ");
+			ch=sc.next().charAt(0);
+		}
+	}
+}
