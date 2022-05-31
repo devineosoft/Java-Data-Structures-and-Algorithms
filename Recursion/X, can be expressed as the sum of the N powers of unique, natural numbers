@@ -1,0 +1,32 @@
+/*Find the number of ways that a given integer, X, can be expressed as the sum of the N powers of unique, natural numbers.
+eg X=13 and N=2,  then 13=2^2 +3^2   Output=1*/
+import java.util.*;
+
+class Result {
+    public static int check(int remaining, int power, int base){
+        int result=(int)Math.pow(base, power);
+        if(remaining==result)
+            return 1;
+        if(remaining<result)
+            return 0;
+        int x=check(remaining-result, power, base+1);
+        int y=check(remaining, power, base+1);
+        return x+y;
+    }
+   
+
+    public static int powerSum(int X, int N) {
+        return check(X, N, 1);
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int X = sc.nextInt();
+        int N = sc.nextInt();
+        int result = Result.powerSum(X, N);
+		System.out.println(result);
+    }
+}
