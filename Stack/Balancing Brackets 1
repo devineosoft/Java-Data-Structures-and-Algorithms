@@ -1,0 +1,37 @@
+import java.util.*;
+class Solution{
+	
+	public static void main(String []argh)
+	{
+		Scanner sc = new Scanner(System.in);
+		
+		while (sc.hasNext()) {
+            Stack<Character> stc=new Stack<>();
+			String input=sc.next();
+            for(int i=0; i<input.length(); i++){
+                char x=input.charAt(i);
+                if(x=='('||x=='['||x=='{')
+                    stc.push(x);
+                if(x==')'){
+                    if(stc.peek()=='(')
+                        stc.pop();
+                }
+                if(x==']'){
+                    if(stc.peek()=='[')
+                        stc.pop();
+                }
+                if(x=='}'){
+                    if(stc.peek()=='{')
+                        stc.pop();
+                }
+            }
+            if(stc.isEmpty())
+                System.out.println("true");
+            else
+                System.out.println("false");
+		}	
+	}
+}
+
+
+
