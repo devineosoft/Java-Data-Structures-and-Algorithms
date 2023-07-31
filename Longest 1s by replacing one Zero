@@ -1,0 +1,41 @@
+import java.util.*;
+
+public class Longest1s {
+    public static void main(String[] args) {
+        List<Integer> list = new ArrayList<Integer>(Arrays.asList(0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1 ));
+        Map<Integer, Integer> indexCount = new HashMap<Integer, Integer>();
+
+        for(int i=0; i<list.size()-1; i++) {
+            int count =0;
+            if(list.get(i) == 0 )
+                continue;
+            else {
+                int j = i;
+                while(list.get(j) ==1) {
+                    count++;
+                    if(j==list.size()-1)
+                        break;
+                    else
+                        j++;
+                }
+                indexCount.put(i, count);
+                System.out.println("Index: "+i+" count: "+count);
+                i=j;
+            }
+        }
+
+        Integer max=0;
+        int length1s = 0;
+        for(Integer key : indexCount.keySet()) {
+            Integer newKey = key+indexCount.get(key)+1;
+            if(indexCount.containsKey(newKey)) {
+                length1s = indexCount.get(key)+indexCount.get(newKey)+1;
+                if(max<length1s)
+                    max=length1s;
+            }
+        }
+
+        System.out.println("Max length of 1 = "+ length1s);
+    }
+
+}
